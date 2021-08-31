@@ -20,8 +20,13 @@ export default function TimetableRow(props) {
           placeholder="Name"
         />
       </td>
-      {props.timetableRow.cells.map((cell, i) => (
-        <td key={i} className="timeCell"></td>
+      {props.timetableRow.cells.map((cell, cellIndex) => (
+        <td
+          key={cellIndex}
+          className={`timeCell ${cell === 1 ? "highlighted" : ""}`}
+          onClick={() =>
+            props.handleToggleCell(props.dayIndex, props.rowIndex, cellIndex)
+          }></td>
       ))}
       <td>
         <button className="btn btn-danger ms-1">

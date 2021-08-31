@@ -75,6 +75,15 @@ export default class App extends Component {
     };
   }
 
+  handleToggleCell = (dayIndex, rowIndex, cellIndex) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable[rowIndex].cells[cellIndex] === 0 ?
+      days[dayIndex].timetable[rowIndex].cells[cellIndex] = 1
+      :
+      days[dayIndex].timetable[rowIndex].cells[cellIndex] = 0;
+    this.setState({ days: days });
+  }
+
   handleAddRow = (dayIndex) => {
     let days = [...this.state.days];
     const timetableRow = { name: "", cells: [...Array(96).keys()].map(i => 0) }; // Generate state for blank row
@@ -120,6 +129,7 @@ export default class App extends Component {
                           key={rowIndex}
                           timetableRow={timetableRow}
                           handleRemoveRow={this.handleRemoveRow}
+                          handleToggleCell={this.handleToggleCell}
                           dayIndex={dayIndex}
                           rowIndex={rowIndex}
                         />
