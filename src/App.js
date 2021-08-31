@@ -103,6 +103,14 @@ export default class App extends Component {
     this.setState({ days: days });
   }
 
+  handleClearAllRows = (dayIndex) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable.forEach(tt => (
+      tt.cells = [...Array(96).keys()].map(i => 0)
+    ));
+    this.setState({ days: days });
+  }
+
   getRowHours = (dayIndex, rowIndex) => {
     return this.state.days[dayIndex].timetable[rowIndex].cells.reduce((a, b) => a + b, 0) / 4
   }
@@ -159,7 +167,8 @@ export default class App extends Component {
                         <span className="badge bg-secondary" id="totalHours">0</span>
                       </h5>
                     </div>
-                    <button className="btn btn-danger">Clear All</button>
+                    <button className="btn btn-danger"
+                      onClick={() => this.handleClearAllRows(dayIndex)}>Clear All</button>
                   </div>
                 </div>
               </div>
