@@ -115,6 +115,15 @@ export default class App extends Component {
     return this.state.days[dayIndex].timetable[rowIndex].cells.reduce((a, b) => a + b, 0) / 4
   }
 
+  getDayHours = (dayIndex) => {
+    let dayHours = 0;
+    const days = [...this.state.days];
+    days[dayIndex].timetable.forEach(tt => (
+      dayHours += tt.cells.reduce((a, b) => a + b, 0) / 4
+    ))
+    return dayHours;
+  }
+
   render() {
     return (
       <>
@@ -164,7 +173,7 @@ export default class App extends Component {
                     <div className="mt-2 mb-0">
                       <h5 className="mb-0">
                         Total Hours:{" "}
-                        <span className="badge bg-secondary" id="totalHours">0</span>
+                        <span className="badge bg-secondary">{this.getDayHours(dayIndex)}</span>
                       </h5>
                     </div>
                     <button className="btn btn-danger"
