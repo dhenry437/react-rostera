@@ -34,7 +34,7 @@ export default function TimetableRow(props) {
         </button>
       </td>
       <td style={{ textAlign: "center" }} className="ps-1" id="hours">
-        0 hrs
+        {props.getRowHours(props.dayIndex, props.rowIndex)} hrs
       </td>
       <td style={{ textAlign: "center" }} className="ps-1" id="shifts">
         0 shifts

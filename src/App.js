@@ -97,6 +97,10 @@ export default class App extends Component {
     this.setState({ days: days });
   }
 
+  getRowHours = (dayIndex, rowIndex) => {
+    return this.state.days[dayIndex].timetable[rowIndex].cells.reduce((a, b) => a + b, 0) / 4
+  }
+
   render() {
     return (
       <>
@@ -130,6 +134,7 @@ export default class App extends Component {
                           timetableRow={timetableRow}
                           handleRemoveRow={this.handleRemoveRow}
                           handleToggleCell={this.handleToggleCell}
+                          getRowHours={this.getRowHours}
                           dayIndex={dayIndex}
                           rowIndex={rowIndex}
                         />
