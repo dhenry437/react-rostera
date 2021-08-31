@@ -1,0 +1,18 @@
+.timeCell {
+    border-top: 1.25px solid black;
+    border-bottom: 1.25px solid black;
+    border-left: 1.25px solid lightgrey;
+    width: 30px;
+}
+
+.timeCell:nth-child(4n + 3) {
+    border-left: 1.25px solid black;
+}
+
+td.timeCell:nth-child(98) {
+    border-right: 1.25px solid black;
+}
+
+table td.highlighted {
+    background-color: #999;
+}
