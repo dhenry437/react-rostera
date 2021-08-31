@@ -84,6 +84,12 @@ export default class App extends Component {
     this.setState({ days: days });
   }
 
+  handleClearRow = (dayIndex, rowIndex) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable[rowIndex].cells = [...Array(96).keys()].map(i => 0);
+    this.setState({ days: days });
+  }
+
   handleAddRow = (dayIndex) => {
     let days = [...this.state.days];
     const timetableRow = { name: "", cells: [...Array(96).keys()].map(i => 0) }; // Generate state for blank row
@@ -134,6 +140,7 @@ export default class App extends Component {
                           timetableRow={timetableRow}
                           handleRemoveRow={this.handleRemoveRow}
                           handleToggleCell={this.handleToggleCell}
+                          handleClearRow={this.handleClearRow}
                           getRowHours={this.getRowHours}
                           dayIndex={dayIndex}
                           rowIndex={rowIndex}

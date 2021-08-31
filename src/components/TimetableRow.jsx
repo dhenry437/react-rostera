@@ -29,7 +29,9 @@ export default function TimetableRow(props) {
           }></td>
       ))}
       <td>
-        <button className="btn btn-danger ms-1">
+        <button
+          className="btn btn-danger ms-1"
+          onClick={() => props.handleClearRow(props.dayIndex, props.rowIndex)}>
           <i className="bi-trash"></i>
         </button>
       </td>
