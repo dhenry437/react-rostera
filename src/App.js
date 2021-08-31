@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TimetableRow from "./components/TimetableRow";
+import SummaryTable from "./components/SummaryTable";
 
 export default class App extends Component {
   constructor(props) {
@@ -184,6 +185,7 @@ export default class App extends Component {
             </div>
           ))}
         </div>
+        <SummaryTable days={this.state.days} />
       </>
     );
   }
