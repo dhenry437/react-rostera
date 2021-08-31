@@ -6,7 +6,8 @@ export default function TimetableRow(props) {
     <tr>
       <td>
         <button
-          className="btn btn-danger btn-sm d-flex justify-content-center align-items-center me-1">
+          className="btn btn-danger btn-sm d-flex justify-content-center align-items-center me-1"
+          onClick={() => props.handleRemoveRow(props.dayIndex, props.rowIndex)}>
           <i className="bi-dash"></i>
         </button>
       </td>
@@ -15,16 +16,15 @@ export default function TimetableRow(props) {
           style={{ width: 125 }}
           className="me-1 form-control"
           type="text"
-          maxlength="12"
+          maxLength="12"
           placeholder="Name"
         />
       </td>
-      {props.timetableRow.cells.map(cell => (
-          <td className="timeCell"></td>
+      {props.timetableRow.cells.map((cell, i) => (
+        <td key={i} className="timeCell"></td>
       ))}
       <td>
-        <button
-          className="btn btn-danger ms-1">
+        <button className="btn btn-danger ms-1">
           <i className="bi-trash"></i>
         </button>
       </td>

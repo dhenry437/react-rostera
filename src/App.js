@@ -13,13 +13,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -28,13 +22,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -43,13 +31,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -58,13 +40,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -73,13 +49,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -88,13 +58,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -103,13 +67,7 @@ export default class App extends Component {
           timetable: [
             {
               name: "",
-              cells: [
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              ],
+              cells: [...Array(96).keys()].map(i => 0),
             },
           ],
         },
@@ -117,46 +75,66 @@ export default class App extends Component {
     };
   }
 
+  handleAddRow = (dayIndex) => {
+    let days = [...this.state.days];
+    const timetableRow = { name: "", cells: [...Array(96).keys()].map(i => 0) }; // Generate state for blank row
+    days[dayIndex].timetable.push(timetableRow);
+    this.setState({ days: days });
+  }
+
+  handleRemoveRow = (dayIndex, rowIndex) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable.splice(rowIndex, 1);
+    this.setState({ days: days });
+  }
+
   render() {
     return (
       <>
         <Navbar />
         <div className="accordion m-3" id="accordionExample">
-          {this.state.days.map((day, i) => (
-            <div className="accordion-item">
+          {this.state.days.map((day, dayIndex) => (
+            <div key={dayIndex} className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
                 <button
-                  className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
+                  // className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
+                  className="accordion-button"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target={`#collapse${i}`}
+                  data-bs-target={`#collapse${dayIndex}`}
                   aria-expanded="true"
-                  aria-controls={`collapse${i}`}>
+                  aria-controls={`collapse${dayIndex}`}>
                   {day.name}
                 </button>
               </h2>
               <div
-                id={`collapse${i}`}
-                className={`accordion-collapse collapse ${i === 0 && "show"}`}
-                aria-labelledby={`heading${i}`}>
+                id={`collapse${dayIndex}`}
+                // className={`accordion-collapse collapse ${i === 0 && "show"}`}
+                className="accordion-collapse collapse show"
+                aria-labelledby={`heading${dayIndex}`}>
                 <div className="accordion-body">
                   <table>
                     <tbody>
-                      {day.timetable.map((timetableRow, i) => (
-                        <TimetableRow timetableRow={timetableRow} i={i} />
+                      {day.timetable.map((timetableRow, rowIndex) => (
+                        <TimetableRow
+                          key={rowIndex}
+                          timetableRow={timetableRow}
+                          handleRemoveRow={this.handleRemoveRow}
+                          dayIndex={dayIndex}
+                          rowIndex={rowIndex}
+                        />
                       ))}
                     </tbody>
                   </table>
                   <div className="d-flex justify-content-between">
-                    <button className="btn btn-success d-flex justify-content-center align-items-center mt-2">
-                      <i className="bi-plus"></i>
+                    <button className="btn btn-success d-flex justify-content-center align-items-center mt-2"
+                      onClick={() => this.handleAddRow(dayIndex)}>
+                      <i className="bi-person-plus-fill"></i>
                     </button>
                     <div className="mt-2 mb-0">
                       <h5 className="mb-0">
                         Total Hours:{" "}
-                        <span className="badge badge-secondary" id="totalHours">
-                          0
-                        </span>
+                        <span className="badge bg-secondary" id="totalHours">0</span>
                       </h5>
                     </div>
                     <button className="btn btn-danger">Clear All</button>
