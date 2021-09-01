@@ -8,7 +8,7 @@ export default function TimetableRow(props) {
         <button
           className="btn btn-danger btn-sm d-flex justify-content-center align-items-center me-1"
           onClick={() => props.handleRemoveRow(props.dayIndex, props.rowIndex)}>
-          <i className="bi-dash"></i>
+          <i className="bi-dash" style={{fontSize: "1.25em"}}></i>
         </button>
       </td>
       <td>
