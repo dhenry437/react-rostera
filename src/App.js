@@ -76,12 +76,19 @@ export default class App extends Component {
     };
   }
 
-  handleToggleCell = (dayIndex, rowIndex, cellIndex) => {
+  toggleCell = (dayIndex, rowIndex, cellIndex) => {
     let days = [...this.state.days];
     days[dayIndex].timetable[rowIndex].cells[cellIndex] === 0 ?
       days[dayIndex].timetable[rowIndex].cells[cellIndex] = 1
       :
       days[dayIndex].timetable[rowIndex].cells[cellIndex] = 0;
+    this.setState({ days: days });
+  }
+
+  // Takes an parameter value being 0 or 1 (unhighlighted or highlighted)
+  setCellHighlight = (dayIndex, rowIndex, cellIndex, value) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable[rowIndex].cells[cellIndex] = value;
     this.setState({ days: days });
   }
 
@@ -142,7 +149,7 @@ export default class App extends Component {
     return (
       <>
         <Navbar />
-        <div className="accordion m-3" id="accordionExample">
+        <div className="unselectable accordion m-3" id="accordionExample">
           {this.state.days.map((day, dayIndex) => (
             <div key={dayIndex} className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
@@ -163,14 +170,15 @@ export default class App extends Component {
                 className="accordion-collapse collapse show"
                 aria-labelledby={`heading${dayIndex}`}>
                 <div className="accordion-body">
-                  <table>
+                  <table draggable="false">
                     <tbody>
                       {day.timetable.map((timetableRow, rowIndex) => (
                         <TimetableRow
                           key={rowIndex}
                           timetableRow={timetableRow}
                           handleRemoveRow={this.handleRemoveRow}
-                          handleToggleCell={this.handleToggleCell}
+                          toggleCell={this.toggleCell}
+                          setCellHighlight={this.setCellHighlight}
                           handleClearRow={this.handleClearRow}
                           getRowHours={this.getRowHours}
                           getRowShifts={this.getRowShifts}
