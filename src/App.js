@@ -116,6 +116,19 @@ export default class App extends Component {
     return this.state.days[dayIndex].timetable[rowIndex].cells.reduce((a, b) => a + b, 0) / 4
   }
 
+  getRowShifts = (dayIndex, rowIndex) => {
+    let shiftCount = 0;
+    let inShift = false;
+    this.state.days[dayIndex].timetable[rowIndex].cells.forEach(cell => {
+      if (!inShift && cell) {
+        inShift = true;
+        shiftCount += 1;
+      } else if (!cell)
+        inShift = false;
+    })
+    return shiftCount;
+  }
+
   getDayHours = (dayIndex) => {
     let dayHours = 0;
     const days = [...this.state.days];
@@ -160,6 +173,7 @@ export default class App extends Component {
                           handleToggleCell={this.handleToggleCell}
                           handleClearRow={this.handleClearRow}
                           getRowHours={this.getRowHours}
+                          getRowShifts={this.getRowShifts}
                           dayIndex={dayIndex}
                           rowIndex={rowIndex}
                         />

@@ -39,7 +39,7 @@ export default function TimetableRow(props) {
         {props.getRowHours(props.dayIndex, props.rowIndex)} hrs
       </td>
       <td style={{ textAlign: "center" }} className="ps-1" id="shifts">
-        0 shifts
+        {props.getRowShifts(props.dayIndex, props.rowIndex)} shifts
       </td>
     </tr>
   );
