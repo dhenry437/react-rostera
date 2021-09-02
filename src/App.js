@@ -78,19 +78,18 @@ export default class App extends Component {
 
   toggleCell = (dayIndex, rowIndex, cellIndex) => {
     let days = [...this.state.days];
-    days[dayIndex].timetable[rowIndex].cells[cellIndex] === 0 ?
-      days[dayIndex].timetable[rowIndex].cells[cellIndex] = 1
-      :
-      days[dayIndex].timetable[rowIndex].cells[cellIndex] = 0;
+    days[dayIndex].timetable[rowIndex].cells[cellIndex] === 0
+      ? (days[dayIndex].timetable[rowIndex].cells[cellIndex] = 1)
+      : (days[dayIndex].timetable[rowIndex].cells[cellIndex] = 0);
     this.setState({ days: days });
-  }
+  };
 
   // Takes an parameter value being 0 or 1 (unhighlighted or highlighted)
   setCellHighlight = (dayIndex, rowIndex, cellIndex, value) => {
     let days = [...this.state.days];
     days[dayIndex].timetable[rowIndex].cells[cellIndex] = value;
     this.setState({ days: days });
-  }
+  };
 
   // Generic change handler.
   handleNameInputChange = (event, dayIndex, rowIndex) => {
@@ -101,34 +100,41 @@ export default class App extends Component {
 
   handleClearRow = (dayIndex, rowIndex) => {
     let days = [...this.state.days];
-    days[dayIndex].timetable[rowIndex].cells = [...Array(96).keys()].map(i => 0);
+    days[dayIndex].timetable[rowIndex].cells = [...Array(96).keys()].map(
+      i => 0
+    );
     this.setState({ days: days });
-  }
+  };
 
-  handleAddRow = (dayIndex) => {
+  handleAddRow = dayIndex => {
     let days = [...this.state.days];
     const timetableRow = { name: "", cells: [...Array(96).keys()].map(i => 0) }; // Generate state for blank row
     days[dayIndex].timetable.push(timetableRow);
     this.setState({ days: days });
-  }
+  };
 
   handleRemoveRow = (dayIndex, rowIndex) => {
     let days = [...this.state.days];
     days[dayIndex].timetable.splice(rowIndex, 1);
     this.setState({ days: days });
-  }
+  };
 
-  handleClearAllRows = (dayIndex) => {
+  handleClearAllRows = dayIndex => {
     let days = [...this.state.days];
-    days[dayIndex].timetable.forEach(tt => (
-      tt.cells = [...Array(96).keys()].map(i => 0)
-    ));
+    days[dayIndex].timetable.forEach(
+      tt => (tt.cells = [...Array(96).keys()].map(i => 0))
+    );
     this.setState({ days: days });
-  }
+  };
 
   getRowHours = (dayIndex, rowIndex) => {
-    return this.state.days[dayIndex].timetable[rowIndex].cells.reduce((a, b) => a + b, 0) / 4
-  }
+    return (
+      this.state.days[dayIndex].timetable[rowIndex].cells.reduce(
+        (a, b) => a + b,
+        0
+      ) / 4
+    );
+  };
 
   getRowShifts = (dayIndex, rowIndex) => {
     let shiftCount = 0;
@@ -137,20 +143,19 @@ export default class App extends Component {
       if (!inShift && cell) {
         inShift = true;
         shiftCount += 1;
-      } else if (!cell)
-        inShift = false;
-    })
+      } else if (!cell) inShift = false;
+    });
     return shiftCount;
-  }
+  };
 
-  getDayHours = (dayIndex) => {
+  getDayHours = dayIndex => {
     let dayHours = 0;
     const days = [...this.state.days];
-    days[dayIndex].timetable.forEach(tt => (
-      dayHours += tt.cells.reduce((a, b) => a + b, 0) / 4
-    ))
+    days[dayIndex].timetable.forEach(
+      tt => (dayHours += tt.cells.reduce((a, b) => a + b, 0) / 4)
+    );
     return dayHours;
-  }
+  };
 
   render() {
     return (
@@ -178,6 +183,21 @@ export default class App extends Component {
                 aria-labelledby={`heading${dayIndex}`}>
                 <div className="accordion-body">
                   <table draggable="false">
+                    <thead>
+                      <th></th>
+                      <th></th>
+                      <th colSpan="2" style={{textAlign: "start" }}>
+                        0
+                      </th>
+                      {[...Array(23).keys()].map(e => (
+                        <th colSpan="4" style={{textAlign: "center" }}>
+                          {e + 1}
+                        </th>
+                      ))}
+                      <th colSpan="2" style={{textAlign: "end" }}>
+                        24
+                      </th>
+                    </thead>
                     <tbody>
                       {day.timetable.map((timetableRow, rowIndex) => (
                         <TimetableRow
@@ -197,18 +217,24 @@ export default class App extends Component {
                     </tbody>
                   </table>
                   <div className="d-flex justify-content-between">
-                    <button className="btn btn-success d-flex justify-content-center align-items-center mt-2"
+                    <button
+                      className="btn btn-success d-flex justify-content-center align-items-center mt-2"
                       onClick={() => this.handleAddRow(dayIndex)}>
                       <i className="bi-person-plus-fill"></i>
                     </button>
                     <div className="mt-2 mb-0">
                       <h5 className="mb-0">
                         Total Hours:{" "}
-                        <span className="badge bg-secondary">{this.getDayHours(dayIndex)}</span>
+                        <span className="badge bg-secondary">
+                          {this.getDayHours(dayIndex)}
+                        </span>
                       </h5>
                     </div>
-                    <button className="btn btn-danger"
-                      onClick={() => this.handleClearAllRows(dayIndex)}>Clear All</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => this.handleClearAllRows(dayIndex)}>
+                      Clear All
+                    </button>
                   </div>
                 </div>
               </div>
