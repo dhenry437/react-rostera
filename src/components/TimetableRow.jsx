@@ -50,6 +50,7 @@ export default function TimetableRow(props) {
           type="text"
           maxLength="12"
           placeholder="Name"
+          onChange={(e) => props.handleNameInputChange(e, props.dayIndex, props.rowIndex)}
         />
       </td>
       {props.timetableRow.cells.map((cell, cellIndex) => (

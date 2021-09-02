@@ -92,6 +92,13 @@ export default class App extends Component {
     this.setState({ days: days });
   }
 
+  // Generic change handler.
+  handleNameInputChange = (event, dayIndex, rowIndex) => {
+    let days = [...this.state.days];
+    days[dayIndex].timetable[rowIndex].name = event.target.value;
+    this.setState({ days: days });
+  };
+
   handleClearRow = (dayIndex, rowIndex) => {
     let days = [...this.state.days];
     days[dayIndex].timetable[rowIndex].cells = [...Array(96).keys()].map(i => 0);
@@ -177,6 +184,7 @@ export default class App extends Component {
                           key={rowIndex}
                           timetableRow={timetableRow}
                           handleRemoveRow={this.handleRemoveRow}
+                          handleNameInputChange={this.handleNameInputChange}
                           toggleCell={this.toggleCell}
                           setCellHighlight={this.setCellHighlight}
                           handleClearRow={this.handleClearRow}
