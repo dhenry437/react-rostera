@@ -73,34 +73,34 @@ export default function App() {
 
   // Load data from local storage
   useEffect(() => {
-    setDays([ ...JSON.parse(localStorage.getItem('days')) ]);
-  }, [])
+    setDays([...JSON.parse(localStorage.getItem("days"))]);
+  }, []);
 
   // Save data to local storage
   useEffect(() => {
-    localStorage.setItem('days', JSON.stringify(days));
-  }, [days])
+    localStorage.setItem("days", JSON.stringify(days));
+  }, [days]);
 
   const toggleCell = (dayIndex, rowIndex, cellIndex) => {
     let tmpDays = [...days];
     tmpDays[dayIndex].timetable[rowIndex].cells[cellIndex] === 0
       ? (tmpDays[dayIndex].timetable[rowIndex].cells[cellIndex] = 1)
       : (tmpDays[dayIndex].timetable[rowIndex].cells[cellIndex] = 0);
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   // Takes an parameter value being 0 or 1 (unhighlighted or highlighted)
   const setCellHighlight = (dayIndex, rowIndex, cellIndex, value) => {
     let tmpDays = [...days];
     tmpDays[dayIndex].timetable[rowIndex].cells[cellIndex] = value;
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   // Generic change handler.
   const handleNameInputChange = (event, dayIndex, rowIndex) => {
     let tmpDays = [...days];
     tmpDays[dayIndex].timetable[rowIndex].name = event.target.value;
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   const handleClearRow = (dayIndex, rowIndex) => {
@@ -108,20 +108,20 @@ export default function App() {
     tmpDays[dayIndex].timetable[rowIndex].cells = [...Array(96).keys()].map(
       i => 0
     );
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   const handleAddRow = dayIndex => {
     let tmpDays = [...days];
     const timetableRow = { name: "", cells: [...Array(96).keys()].map(i => 0) }; // Generate state for blank row
     tmpDays[dayIndex].timetable.push(timetableRow);
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   const handleRemoveRow = (dayIndex, rowIndex) => {
     let tmpDays = [...days];
     tmpDays[dayIndex].timetable.splice(rowIndex, 1);
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   const handleClearAllRows = dayIndex => {
@@ -129,7 +129,7 @@ export default function App() {
     tmpDays[dayIndex].timetable.forEach(
       tt => (tt.cells = [...Array(96).keys()].map(i => 0))
     );
-    setDays([ ...tmpDays ]);
+    setDays([...tmpDays]);
   };
 
   const getRowHours = (dayIndex, rowIndex) => {
@@ -185,19 +185,21 @@ export default function App() {
               <div className="accordion-body">
                 <table draggable="false">
                   <thead>
-                    <th></th>
-                    <th></th>
-                    <th colSpan="2" style={{ textAlign: "start" }}>
-                      0
-                    </th>
-                    {[...Array(23).keys()].map(e => (
-                      <th colSpan="4" style={{ textAlign: "center" }}>
-                        {e + 1}
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th colSpan="2" style={{ textAlign: "start" }}>
+                        0
                       </th>
-                    ))}
-                    <th colSpan="2" style={{ textAlign: "end" }}>
-                      24
-                    </th>
+                      {[...Array(23).keys()].map(e => (
+                        <th key={e} colSpan="4" style={{ textAlign: "center" }}>
+                          {e + 1}
+                        </th>
+                      ))}
+                      <th colSpan="2" style={{ textAlign: "end" }}>
+                        24
+                      </th>
+                    </tr>
                   </thead>
                   <tbody>
                     {day.timetable.map((timetableRow, rowIndex) => (

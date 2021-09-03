@@ -9,12 +9,31 @@ export default function SummaryTable(props) {
     return result;
   };
 
+  const handleJsonExport = () => {
+    download(JSON.stringify(props.days), "json");
+  };
+
+  const download = (data, fileExt) => {
+    const URIs = {
+      json: "data:text/json;charset=utf-8,",
+      csv: "data:text/csv;charset=utf-8,",
+    };
+    let content = URIs[fileExt] + data;
+    let encodedUri = encodeURI(content);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `rostera_export.${fileExt}`);
+    document.body.appendChild(link);
+
+    link.click();
+  };
+
   const getRowData = () => {
     let rowData = {}; // name: { name: "", shifts: [mon: "", ...] }
     props.days.forEach((day, dayIndex) => {
       day.timetable.forEach(tt => {
         // Skip if name blank
-        if (tt.name.trim() === "")  return;
+        if (tt.name.trim() === "") return;
         // Skip if no cells highlighted
         if (tt.cells.reduce((a, b) => a + b, 0) === 0) return;
         // Check if person exits otherwise create
@@ -41,7 +60,8 @@ export default function SummaryTable(props) {
             shiftStart = `${convertToHHMM(i * 0.25)}`;
           } else if (inShift && !cell) {
             inShift = false;
-            if (rowData[tt.name].shifts[day.name] !== "") rowData[tt.name].shifts[day.name] += ", ";
+            if (rowData[tt.name].shifts[day.name] !== "")
+              rowData[tt.name].shifts[day.name] += ", ";
             rowData[tt.name].shifts[
               day.name
             ] += `${shiftStart} - ${convertToHHMM(i * 0.25)}`;
@@ -55,7 +75,28 @@ export default function SummaryTable(props) {
 
   return (
     <div className="card mx-3 mb-3">
-      <div className="card-header">Summary</div>
+      <div className="card-header d-flex justify-content-between">
+        Summary
+        <div className="btn-group">
+          <button
+            type="button"
+            className="btn btn-primary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-box-arrow-down m"></i> Export
+          </button>
+          <ul className="dropdown-menu dropdown-menu-end">
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleJsonExport()}
+                type="button">
+                JSON
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className="card-body">
         <table className="table table-striped">
           <thead>
