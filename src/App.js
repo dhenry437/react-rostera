@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TimetableRow from "./components/TimetableRow";
@@ -70,6 +70,16 @@ export default function App() {
       ],
     },
   ]);
+
+  // Load data from local storage
+  useEffect(() => {
+    setDays([ ...JSON.parse(localStorage.getItem('days')) ]);
+  }, [])
+
+  // Save data to local storage
+  useEffect(() => {
+    localStorage.setItem('days', JSON.stringify(days));
+  }, [days])
 
   const toggleCell = (dayIndex, rowIndex, cellIndex) => {
     let tmpDays = [...days];
