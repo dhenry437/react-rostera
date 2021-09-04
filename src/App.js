@@ -159,15 +159,28 @@ export default function App() {
     return dayHours;
   };
 
+  const importJson = event => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function () {
+      const data = reader.result;
+      // validateObjectSchema();
+      setDays([...JSON.parse(data)]);
+    };
+    reader.onerror = function () {
+      alert(reader.error);
+    };
+  };  
+
   return (
     <>
-      <Navbar />
+      <Navbar importJson={importJson} />
       <div className="unselectable accordion m-3" id="accordionExample">
         {days.map((day, dayIndex) => (
           <div key={dayIndex} className="accordion-item">
             <h2 className="accordion-header" id="headingOne">
               <button
-                // className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
                 className="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
@@ -179,7 +192,6 @@ export default function App() {
             </h2>
             <div
               id={`collapse${dayIndex}`}
-              // className={`accordion-collapse collapse ${i === 0 && "show"}`}
               className="accordion-collapse collapse show"
               aria-labelledby={`heading${dayIndex}`}>
               <div className="accordion-body">

@@ -13,6 +13,8 @@ export default function SummaryTable(props) {
     download(JSON.stringify(props.days), "json");
   };
 
+  const handleCsvExport = () => {};
+
   const download = (data, fileExt) => {
     const URIs = {
       json: "data:text/json;charset=utf-8,",
@@ -83,7 +85,7 @@ export default function SummaryTable(props) {
             className="btn btn-primary dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false">
-            <i class="bi bi-box-arrow-down m"></i> Export
+            <i className="bi bi-box-arrow-down m"></i> Export
           </button>
           <ul className="dropdown-menu dropdown-menu-end">
             <li>

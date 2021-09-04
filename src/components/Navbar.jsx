@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../img/logo32.png";
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container-fluid">
@@ -25,19 +25,21 @@ export default function Navbar() {
           </button>
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              <button className="dropdown-item" type="button">
-                Action
+              <button className="btn btn-outline-success mx-3" type="button"
+            style={{width: 'calc(100% - 2rem)'}}
+              onClick={() => {document.getElementById('fileUpload').click();}}>
+                <i className="bi bi-box-arrow-in-down"></i> Import
               </button>
-            </li>
-            <li>
-              <button className="dropdown-item" type="button">
-                Another action
-              </button>
-            </li>
-            <li>
-              <button className="dropdown-item" type="button">
-                Something else here
-              </button>
+              <div>
+                <input
+                  style={{ display: "none"}}
+                  type="file"
+                  name="Import"
+                  id="fileUpload"
+                  accept=".json"
+                  onChange={(e) => props.importJson(e)}
+                />
+              </div>
             </li>
           </ul>
         </div>
