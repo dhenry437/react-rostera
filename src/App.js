@@ -5,7 +5,7 @@ import TimetableRow from "./components/TimetableRow";
 import SummaryTable from "./components/SummaryTable";
 
 export default function App() {
-  const [days, setDays] = useState([
+  const initialDays = [
     {
       name: "Monday",
       timetable: [
@@ -69,11 +69,18 @@ export default function App() {
         },
       ],
     },
-  ]);
+  ];
+
+  const [days, setDays] = useState(initialDays);
+
+  const resetDays = () => {
+    setDays(initialDays);
+  };
 
   // Load data from local storage
   useEffect(() => {
-    setDays([...JSON.parse(localStorage.getItem("days"))]);
+    const days = localStorage.getItem("days");
+    if (days) setDays([...JSON.parse(days)]);
   }, []);
 
   // Save data to local storage
@@ -176,8 +183,16 @@ export default function App() {
     };
   };
 
-  const validateObjectSchema = (data) => {
-    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const validateObjectSchema = data => {
+    const weekdays = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
     // Assert data is array
     if (!Array.isArray(data)) return false;
     // Assert data array has 7 elements
@@ -189,19 +204,19 @@ export default function App() {
       if (!Array.isArray(day.timetable)) return false;
       day.timetable.forEach(tt => {
         // Assert timetable name is string
-        if (typeof tt.name !== 'string') return false;
+        if (typeof tt.name !== "string") return false;
         // Assert timetable cells is array
         if (!Array.isArray(tt.cells)) return false;
         // Assert cells is of lenght 96
         if (tt.cells.length !== 96) return false;
-      })
-    })
+      });
+    });
     return true;
-  }
+  };
 
   return (
     <>
-      <Navbar importJson={importJson} />
+      <Navbar importJson={importJson} resetDays={resetDays} />
       <div className="unselectable accordion m-3" id="accordionExample">
         {days.map((day, dayIndex) => (
           <div key={dayIndex} className="accordion-item">

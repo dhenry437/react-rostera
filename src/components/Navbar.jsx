@@ -2,6 +2,11 @@ import React from "react";
 import logo from "../img/logo32.png";
 
 export default function Navbar(props) {
+  const clearLocalStorage = () => {
+    localStorage.removeItem('days');
+    props.resetDays();
+  }
+
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container-fluid">
@@ -40,6 +45,13 @@ export default function Navbar(props) {
                   onChange={(e) => props.importJson(e)}
                 />
               </div>
+            </li>
+            <li>
+              <button className="btn btn-outline-danger mt-1 mx-3" type="button"
+            style={{width: 'calc(100% - 2rem)'}}
+              onClick={() => clearLocalStorage()}>
+                <i className="bi bi-trash"></i> Clear Saved Data
+              </button>
             </li>
           </ul>
         </div>
