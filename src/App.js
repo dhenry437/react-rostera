@@ -165,13 +165,39 @@ export default function App() {
     reader.readAsText(file);
     reader.onload = function () {
       const data = reader.result;
-      // validateObjectSchema();
+      if (!validateObjectSchema(data)) {
+        alert("Invalid data");
+        return;
+      }
       setDays([...JSON.parse(data)]);
     };
     reader.onerror = function () {
       alert(reader.error);
     };
-  };  
+  };
+
+  const validateObjectSchema = (data) => {
+    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    // Assert data is array
+    if (!Array.isArray(data)) return false;
+    // Assert data array has 7 elements
+    if (data.length !== 7) return false;
+    data.forEach((day, dayIndex) => {
+      // Assert day name is correct
+      if (day.name !== weekdays[dayIndex]) return false;
+      // Assert day timetable is array
+      if (!Array.isArray(day.timetable)) return false;
+      day.timetable.forEach(tt => {
+        // Assert timetable name is string
+        if (typeof tt.name !== 'string') return false;
+        // Assert timetable cells is array
+        if (!Array.isArray(tt.cells)) return false;
+        // Assert cells is of lenght 96
+        if (tt.cells.length !== 96) return false;
+      })
+    })
+    return true;
+  }
 
   return (
     <>
