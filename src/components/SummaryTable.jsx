@@ -13,7 +13,29 @@ export default function SummaryTable(props) {
     download(JSON.stringify(props.days), "json");
   };
 
-  const handleCsvExport = () => {};
+  const handleCopy = () => {
+    const elTable = document.querySelector("#summaryTable");
+
+    let range, sel;
+
+    // Ensure that range and selection are supported by the browsers
+    if (document.createRange && window.getSelection) {
+      range = document.createRange();
+      sel = window.getSelection();
+      // unselect any element in the page
+      sel.removeAllRanges();
+
+      try {
+        range.selectNodeContents(elTable);
+        sel.addRange(range);
+      } catch (e) {
+        range.selectNode(elTable);
+        sel.addRange(range);
+      }
+
+      document.execCommand("copy");
+    }
+  };
 
   const download = (data, fileExt) => {
     const URIs = {
@@ -79,28 +101,33 @@ export default function SummaryTable(props) {
     <div className="card mx-3 mb-3">
       <div className="card-header d-flex justify-content-between">
         Summary
-        <div className="btn-group">
-          <button
-            type="button"
-            className="btn btn-primary dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <i className="bi bi-box-arrow-down m"></i> Export
+        <div>
+          <button className="btn btn-success me-1" onClick={() => handleCopy()}>
+            Copy as Text
           </button>
-          <ul className="dropdown-menu dropdown-menu-end">
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleJsonExport()}
-                type="button">
-                JSON
-              </button>
-            </li>
-          </ul>
+          <div className="btn-group">
+            <button
+              type="button"
+              className="btn btn-primary dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i className="bi bi-box-arrow-down m"></i> Export
+            </button>
+            <ul className="dropdown-menu dropdown-menu-end">
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleJsonExport()}
+                  type="button">
+                  JSON
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="card-body">
-        <table className="table table-striped">
+        <table className="table table-striped" id="summaryTable">
           <thead>
             <tr>
               <th>Name</th>
