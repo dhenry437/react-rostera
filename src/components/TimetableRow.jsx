@@ -1,38 +1,98 @@
 import React, { useEffect, useState } from "react";
+// import Autocomplete from "react-autocomplete";
+import Autosuggest from "react-autosuggest";
 import "./TimetableRow.css";
 
 export default function TimetableRow(props) {
   const [mouseDown, setMouseDown] = useState(false);
-  const [mouseDownOrigin, setMouseDownOrigin] = useState({x: null, y: null, value: null});
+  const [mouseDownOrigin, setMouseDownOrigin] = useState({
+    x: null,
+    y: null,
+    value: null,
+  });
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener("mouseup", handleMouseUp);
 
     // cleanup this component
     return () => {
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 
   const handleMouseDown = (cellIndex, cellValue) => {
     setMouseDown(true);
-    setMouseDownOrigin({x: cellIndex, y: props.rowIndex, value: cellValue});
-  }
+    setMouseDownOrigin({ x: cellIndex, y: props.rowIndex, value: cellValue });
+  };
 
   const handleMouseUp = () => {
     setMouseDown(false);
-    setMouseDownOrigin({x: null, y: null, value: null});
-  }
+    setMouseDownOrigin({ x: null, y: null, value: null });
+  };
 
-  const handleMouseOver = (cellIndex) => {
+  const handleMouseOver = cellIndex => {
     if (mouseDown) {
       const min = Math.min.apply(null, [mouseDownOrigin.x, cellIndex]);
       const max = Math.max.apply(null, [mouseDownOrigin.x, cellIndex]);
       for (let i = min; i < max; i++) {
-        props.setCellHighlight(props.dayIndex, props.rowIndex, i, mouseDownOrigin.value ? 0 : 1)
+        props.setCellHighlight(
+          props.dayIndex,
+          props.rowIndex,
+          i,
+          mouseDownOrigin.value ? 0 : 1
+        );
       }
     }
-  }
+  };
+
+  const escapeRegexCharacters = str => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  };
+
+  const getSuggestions = value => {
+    const escapedValue = escapeRegexCharacters(value.trim());
+
+    if (escapedValue === "") {
+      return [];
+    }
+
+    const regex = new RegExp("^" + escapedValue, "i");
+
+    return props.getUniqueNames(value).filter(name => regex.test(name));
+  };
+
+  const getSuggestionValue = suggestion => {
+    return suggestion;
+  };
+
+  const renderSuggestion = suggestion => {
+    return <span>{suggestion}</span>;
+  };
+
+  const onSuggestionsFetchRequested = () => {
+    setSuggestions(getSuggestions(props.timetableRow.name));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const onChange = (event, { newValue, method }) => {
+    props.handleNameInputChange(
+      newValue,
+      props.dayIndex,
+      props.rowIndex
+    )
+  };
+
+  const inputProps = {
+    placeholder: "Name",
+    className: "me-1 form-control",
+    style: { width: 125 },
+    value: props.timetableRow.name,
+    onChange: onChange
+  };
 
   return (
     <tr>
@@ -44,14 +104,13 @@ export default function TimetableRow(props) {
         </button>
       </td>
       <td>
-        <input
-          style={{ width: 125 }}
-          className="me-1 form-control"
-          type="text"
-          maxLength="12"
-          placeholder="Name"
-          value={props.timetableRow.name}
-          onChange={(e) => props.handleNameInputChange(e, props.dayIndex, props.rowIndex)}
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
         />
       </td>
       {props.timetableRow.cells.map((cell, cellIndex) => (
@@ -59,9 +118,10 @@ export default function TimetableRow(props) {
           key={cellIndex}
           className={`timeCell ${cell === 1 ? "highlighted" : ""}`}
           onMouseDown={() => handleMouseDown(cellIndex, cell)}
-          onClick={() => props.toggleCell(props.dayIndex, props.rowIndex, cellIndex)}
-          onMouseOver={() => handleMouseOver(cellIndex)}
-          ></td>
+          onClick={() =>
+            props.toggleCell(props.dayIndex, props.rowIndex, cellIndex)
+          }
+          onMouseOver={() => handleMouseOver(cellIndex)}></td>
       ))}
       <td>
         <button

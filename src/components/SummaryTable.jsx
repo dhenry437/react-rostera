@@ -112,8 +112,8 @@ export default function SummaryTable(props) {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(getRowData()).map(row => (
-              <tr>
+            {Object.entries(getRowData()).map((row, i) => (
+              <tr key={i}>
                 <th scope="row">{row[1].name}</th>
                 <td>{row[1].shifts.Monday}</td>
                 <td>{row[1].shifts.Tuesday}</td>

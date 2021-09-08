@@ -104,9 +104,9 @@ export default function App() {
   };
 
   // Generic change handler.
-  const handleNameInputChange = (event, dayIndex, rowIndex) => {
+  const handleNameInputChange = (value, dayIndex, rowIndex) => {
     let tmpDays = [...days];
-    tmpDays[dayIndex].timetable[rowIndex].name = event.target.value;
+    tmpDays[dayIndex].timetable[rowIndex].name = value;
     setDays([...tmpDays]);
   };
 
@@ -164,6 +164,20 @@ export default function App() {
       tt => (dayHours += tt.cells.reduce((a, b) => a + b, 0) / 4)
     );
     return dayHours;
+  };
+
+  const getUniqueNames = (value) => {
+    let uniqueNames = [];
+    days.forEach(day => {
+      day.timetable.forEach(tt => {
+        if (tt.name.trim() !== "") {
+          if (!uniqueNames.includes(tt.name.trim())) {
+            uniqueNames.push(tt.name.trim());
+          }
+        }
+      });
+    });
+    return uniqueNames.filter(name => name !== value);
   };
 
   const importJson = event => {
@@ -266,6 +280,8 @@ export default function App() {
                         handleClearRow={handleClearRow}
                         getRowHours={getRowHours}
                         getRowShifts={getRowShifts}
+                        getUniqueNames={getUniqueNames}
+                        names={getUniqueNames()}
                         dayIndex={dayIndex}
                         rowIndex={rowIndex}
                       />
