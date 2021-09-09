@@ -62,6 +62,11 @@ button.no-style {
   z-index: 20;
 }
 
+.react-autosuggest__container--open > .form-control {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
