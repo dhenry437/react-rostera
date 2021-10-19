@@ -79,11 +79,7 @@ export default function TimetableRow(props) {
   };
 
   const onChange = (event, { newValue, method }) => {
-    props.handleNameInputChange(
-      newValue,
-      props.dayIndex,
-      props.rowIndex
-    )
+    props.handleNameInputChange(newValue, props.dayIndex, props.rowIndex);
   };
 
   const inputProps = {
@@ -91,7 +87,7 @@ export default function TimetableRow(props) {
     className: "me-1 form-control",
     style: { width: 125 },
     value: props.timetableRow.name,
-    onChange: onChange
+    onChange: onChange,
   };
 
   return (

@@ -3,9 +3,9 @@ import logo from "../img/logo32.png";
 
 export default function Navbar(props) {
   const clearLocalStorage = () => {
-    localStorage.removeItem('days');
+    localStorage.removeItem("days");
     props.resetDays();
-  }
+  };
 
   return (
     <nav className="navbar navbar-light bg-light">
@@ -30,26 +30,32 @@ export default function Navbar(props) {
           </button>
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              <button className="btn btn-outline-success mx-3" type="button"
-            style={{width: 'calc(100% - 2rem)'}}
-              onClick={() => {document.getElementById('fileUpload').click();}}>
+              <button
+                className="btn btn-outline-success mx-3"
+                type="button"
+                style={{ width: "calc(100% - 2rem)" }}
+                onClick={() => {
+                  document.getElementById("fileUpload").click();
+                }}>
                 <i className="bi bi-box-arrow-in-down"></i> Import
               </button>
               <div>
                 <input
-                  style={{ display: "none"}}
+                  style={{ display: "none" }}
                   type="file"
                   name="Import"
                   id="fileUpload"
                   accept=".json"
-                  onChange={(e) => props.importJson(e)}
+                  onChange={e => props.importJson(e)}
                 />
               </div>
             </li>
             <li>
-              <button className="btn btn-outline-danger mt-1 mx-3" type="button"
-            style={{width: 'calc(100% - 2rem)'}}
-              onClick={() => clearLocalStorage()}>
+              <button
+                className="btn btn-outline-danger mt-1 mx-3"
+                type="button"
+                style={{ width: "calc(100% - 2rem)" }}
+                onClick={() => clearLocalStorage()}>
                 <i className="bi bi-trash"></i> Clear Saved Data
               </button>
             </li>

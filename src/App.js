@@ -166,7 +166,7 @@ export default function App() {
     return dayHours;
   };
 
-  const getUniqueNames = (value) => {
+  const getUniqueNames = value => {
     let uniqueNames = [];
     days.forEach(day => {
       day.timetable.forEach(tt => {
