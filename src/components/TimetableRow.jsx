@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Autocomplete from "react-autocomplete";
 import Autosuggest from "react-autosuggest";
 import "./TimetableRow.css";
 
@@ -127,10 +126,10 @@ export default function TimetableRow(props) {
         </button>
       </td>
       <td style={{ textAlign: "center" }} className="ps-1" id="hours">
-        {props.getRowHours(props.dayIndex, props.rowIndex)} hrs
+        {props.getRowHours(props.dayIndex, props.rowIndex)}<br/>hours
       </td>
       <td style={{ textAlign: "center" }} className="ps-1" id="shifts">
-        {props.getRowShifts(props.dayIndex, props.rowIndex)} shifts
+        {props.getRowShifts(props.dayIndex, props.rowIndex)}<br/>shifts
       </td>
     </tr>
   );
