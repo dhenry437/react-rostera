@@ -32,15 +32,39 @@ export default function TimetableRow(props) {
 
   const handleMouseOver = cellIndex => {
     if (mouseDown) {
+      const prevCellStates = props.timetableRow.cells;
       const min = Math.min.apply(null, [mouseDownOrigin.x, cellIndex]);
       const max = Math.max.apply(null, [mouseDownOrigin.x, cellIndex]);
-      for (let i = min; i < max; i++) {
+
+      for (let i = min; i <= max; i++) {
         props.setCellHighlight(
           props.dayIndex,
           props.rowIndex,
           i,
           mouseDownOrigin.value ? 0 : 1
         );
+      }
+
+      // Set all other cells back to their original state
+      for (let i = 0; i < min; i++) {
+        if (props.timetableRow.cells[i] !== prevCellStates[i]) {
+          props.setCellHighlight(
+            props.dayIndex,
+            props.rowIndex,
+            i,
+            prevCellStates[i]
+          );
+        }
+      }
+      for (let i = max + 1; i < 24 * 4; i++) {
+        if (props.timetableRow.cells[i] !== prevCellStates[i]) {
+          props.setCellHighlight(
+            props.dayIndex,
+            props.rowIndex,
+            i,
+            prevCellStates[i]
+          );
+        }
       }
     }
   };
