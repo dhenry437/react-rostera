@@ -10,6 +10,7 @@ export default function TimetableRow(props) {
     value: null,
   });
   const [suggestions, setSuggestions] = useState([]);
+  const [prevCellStates, setPrevCellStates] = useState();
 
   useEffect(() => {
     window.addEventListener("mouseup", handleMouseUp);
@@ -23,16 +24,17 @@ export default function TimetableRow(props) {
   const handleMouseDown = (cellIndex, cellValue) => {
     setMouseDown(true);
     setMouseDownOrigin({ x: cellIndex, y: props.rowIndex, value: cellValue });
+    setPrevCellStates([ ... props.timetableRow.cells]);
   };
 
   const handleMouseUp = () => {
     setMouseDown(false);
     setMouseDownOrigin({ x: null, y: null, value: null });
+    setPrevCellStates(null);
   };
 
   const handleMouseOver = cellIndex => {
     if (mouseDown) {
-      const prevCellStates = props.timetableRow.cells;
       const min = Math.min.apply(null, [mouseDownOrigin.x, cellIndex]);
       const max = Math.max.apply(null, [mouseDownOrigin.x, cellIndex]);
 
