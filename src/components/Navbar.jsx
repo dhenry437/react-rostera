@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../img/logo32.png";
+import logo from "../assets/logo32.png";
 
 export default function Navbar(props) {
   const clearLocalStorage = () => {
